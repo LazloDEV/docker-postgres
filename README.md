@@ -14,13 +14,21 @@ git pushall
 
 # Docker
 
+The following commands must be run in a Powershell terminal or in VS Code terminal:
+
+## Building container from customized image:
+
 docker build -t dbms-postgres .
 
 docker run -d --rm -p 5432:5432 --name my-postgres-1 --network my-bridge-net -e POSTGRES_PASSWORD=mypass dbms-postgres
 
+## Minimum container based on official image:
+
 docker run -d --rm -p 5432:5432 --name my-postgres-2 --network my-bridge-net -e POSTGRES_PASSWORD=mypass postgres:17.4
 
-docker run -d --rm -p 5432:5432 --name my-postgres-3 --network my-bridge-net -e POSTGRES_PASSWORD=mypass -e POSTGRES_DB=login_db -v C:/DBMS/Docker-Postgres/volumes/initdb/init.sql:/docker-entrypoint-initdb.d/init.sql postgres:17.4
+## Container based on official image:
+
+docker run -d --rm -p 5432:5432 --name my-postgres-3 --network my-bridge-net -e POSTGRES_PASSWORD=mypass -e POSTGRES_DB=login_db -v "$(pwd)/volumes/initdb/init.sql:/docker-entrypoint-initdb.d/init.sql" postgres:17.4
 
 
 
